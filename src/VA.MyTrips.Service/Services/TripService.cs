@@ -65,42 +65,74 @@ namespace VA.MyTrips.Service
 
         public async override Task<TripModel> CreateTrip(CreateTripRequest request, ServerCallContext context)
         {
-
-            var newTrip = await _tripComponent.CreateTrip(new Business.Models.TripModel
+            try
             {
-                Name = request.Name,
-                Destination = request.Destination,
-                EndDate = System.DateTime.Parse(request.EndDate),
-                GeoLocation = request.GeoLocation,
-                Photos = new List<Business.Models.PhotoModel>(),
-                StartDate = System.DateTime.Parse(request.StartDate),
-                TripId = Guid.NewGuid().ToString()
-            });
+                var newTrip = await _tripComponent.CreateTrip(new Business.Models.TripModel
+                {
+                    Name = request.Name,
+                    Destination = request.Destination,
+                    EndDate = System.DateTime.Parse(request.EndDate),
+                    GeoLocation = request.GeoLocation,
+                    Photos = new List<Business.Models.PhotoModel>(),
+                    StartDate = System.DateTime.Parse(request.StartDate),
+                    TripId = Guid.NewGuid().ToString()
+                });
 
-            var reply = _mapper.Map<Business.Models.TripModel, TripModel>(newTrip);
+                var reply = _mapper.Map<Business.Models.TripModel, TripModel>(newTrip);
 
-            return reply;
-
-
+                return reply;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "CreateTrip({request})", request);
+                throw new RpcException(new Status(StatusCode.Internal, "Internal Error"));
+            }
         }
 
         public async override Task<SuccessReply> UploadPhoto(UploadPhotoRequest request, ServerCallContext context)
         {
-            var bytes = request.Filebytes.ToByteArray();
-            var succeeded = await _tripComponent.UploadPhoto(request.TripId, bytes);
+            if (string.IsNullOrWhiteSpace(request.TripId))
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "TripId must not be empty"));
 
-            return new SuccessReply
+            if (string.IsNullOrWhiteSpace(request.FileName))
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "FileName must not be empty"));
+
+            try
             {
-                IsSuccess = succeeded
-            };
+                var bytes = request.Filebytes.ToByteArray();
+                var succeeded = await _tripComponent.UploadPhoto(request.TripId, bytes, request.FileName);
+
+                return new SuccessReply
+                {
+                    IsSuccess = succeeded
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "UploadPhoto({TripId})", request.TripId);
+                throw new RpcException(new Status(StatusCode.Internal, "Internal Error"));
+            }
 
         }
 
         public async override Task<SuccessReply> ArchivePhoto(ArchivePhotoRequest request, ServerCallContext context)
         {
-            var result = await _tripComponent.ArchivePhoto(request.TripId, request.PhotoId);
+            if (string.IsNullOrWhiteSpace(request.TripId))
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "TripId must not be empty"));
 
-            return new SuccessReply { IsSuccess = result };
+            if (string.IsNullOrWhiteSpace(request.PhotoId))
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "PhotoId must not be empty"));
+
+            try
+            {
+                var result = await _tripComponent.ArchivePhoto(request.TripId, request.PhotoId);
+                return new SuccessReply { IsSuccess = result };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "UploadPhoto({TripId}, {PhotoId})", request.TripId, request.PhotoId);
+                throw new RpcException(new Status(StatusCode.Internal, "Internal Error"));
+            }
         }
 
     }

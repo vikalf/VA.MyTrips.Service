@@ -12,7 +12,7 @@ namespace VA.MyTrips.Business.Components.Definition
 
         Task<TripModel> CreateTrip(TripModel newTrip);
 
-        Task<bool> UploadPhoto(string tripId, byte[] file);
+        Task<bool> UploadPhoto(string tripId, byte[] file, string fileName);
 
         Task<bool> ArchivePhoto(string tripId, string photoId);
     }

@@ -3,7 +3,11 @@
     "VA.MyTrips.Service": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "STORAGE_BLOB_BASE_URL": "https://mytripsphotos.blob.core.windows.net/photos",
+        "COSMOS_DB": "https://cosmosdb-va-mytrips.documents.azure.com:443/",
+        "COSMOS_DB_KEY": "XSSbYdYl6QzQhCzDgQMN0HYpNeG94FlEWTEszzJMwZTxfaRQbZPhbu2CmEV8SJrwmOG01AUnlWU5mAPuQRkjNw==",
+        "STORAGE_ACCOUNT_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=mytripsphotos;AccountKey=vm2LCudrrf0+DlDRovPdV5Smd75CxNLjGlCOfBvtns/aK5yy4uDApxd2yQx4fHi4g8GuvSWwKFdgcIZC4jLtbA==;EndpointSuffix=core.windows.net"
       },
       "applicationUrl": "https://localhost:5001"
     }    

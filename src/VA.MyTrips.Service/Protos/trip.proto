@@ -45,6 +45,7 @@ message CreateTripRequest {
 message UploadPhotoRequest {
 	string tripId = 1;
 	bytes filebytes = 2;
+	string fileName = 3;
 }
 
 
