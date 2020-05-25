@@ -23,6 +23,12 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Set Set git branch env variables for Docker Tag
+      id: get_branch
+      run: echo ::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF:10})
+    - name: Set Set git commit env variables for Docker Tag
+      id: get_commit
+      run: echo ::set-env name=COMMIT::$(echo ${GITHUB_SHA:7})
     - name: Build and push Docker images
       uses: docker/build-push-action@v1.1.0
       with:
@@ -33,4 +39,4 @@ jobs:
         # Docker repository to tag the image with
         repository: vikalf/va.mytrips.service
         # Comma-delimited list of tags. These will be added to the registry/repository to form the image's tags
-        tags: "latest,${{ env.GITHUB_REF }}-${{ env.GITHUB_SHA }}"
+        tags: "latest,${{ env.BRANCH_NAME }}-${{ env.COMMIT }}"
