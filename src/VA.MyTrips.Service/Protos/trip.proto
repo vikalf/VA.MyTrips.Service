@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+option csharp_namespace = "VA.MyTrips.Service";
+
+package trip;
+
+// The trip service definition.
+service Trip {
+  // Get All Trips for a User
+  rpc GetTrips (EmtpyRequest) returns (TripsReply);
+
+  rpc GetTrip (TripRequest) returns (TripModel);
+
+  rpc CreateTrip (CreateTripRequest) returns (TripModel);
+
+  rpc UploadPhoto (UploadPhotoRequest) returns (SuccessReply);
+  
+  rpc ArchivePhoto (ArchivePhotoRequest) returns (SuccessReply);
+
+}
+
+message TripsReply {
+  repeated TripModel trips = 1;
+}
+
+
+message TripModel {
+  string tripId = 1;
+  string name = 2;
+  string destination = 3;
+  string geoLocation = 4;
+  string startDate = 5;
+  string endDate = 6;
+  repeated PhotoModel photos = 7;
+}
+
+message CreateTripRequest {
+  string name = 2;
+  string destination = 3;
+  string geoLocation = 4;
+  string startDate = 5;
+  string endDate = 6;
+}
+
+message UploadPhotoRequest {
+	string tripId = 1;
+	bytes filebytes = 2;
+}
+
+
+message ArchivePhotoRequest {
+	string tripId = 1;
+	string photoId = 2;
+}
+
+
+message PhotoModel {
+	string tripId = 1;
+	string photoId = 2;
+	string url = 3;
+}
+
+message TripRequest {
+	string tripId = 1;
+}
+
+message SuccessReply  {
+	bool isSuccess = 1;
+}
+
+message EmtpyRequest {}
