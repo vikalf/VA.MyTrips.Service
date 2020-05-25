@@ -23,3 +23,14 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v1.1.0
+      with:
+        # Username used to log in to a Docker registry. If not set then no login will occur
+        username: ${{ secrets.DOCKER_USER_ID }}
+        # Password or personal access token used to log in to a Docker registry. If not set then no login will occur
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        # Docker repository to tag the image with
+        repository: va.mytrips.service
+        # Comma-delimited list of tags. These will be added to the registry/repository to form the image's tags
+        tags: "latest"
