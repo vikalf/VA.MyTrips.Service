@@ -26,7 +26,7 @@ namespace VA.MyTrips.Data.Repositories.Implementation
         {
             var stream = new MemoryStream(file);
             var blobClient = _blobServiceClient.GetBlobContainerClient(_photoBlobName);
-            await blobClient.UploadBlobAsync(name, stream);            
+            await blobClient.UploadBlobAsync(name, stream);
         }
 
     }

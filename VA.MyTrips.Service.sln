@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VA.MyTrips.Service", "src\VA.MyTrips.Service\VA.MyTrips.Service.csproj", "{B6145EBF-2B5E-462C-A2F2-88466E6C30B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VA.MyTrips.Service", "src\VA.MyTrips.Service\VA.MyTrips.Service.csproj", "{B6145EBF-2B5E-462C-A2F2-88466E6C30B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VA.MyTrips.Business", "src\VA.MyTrips.Business\VA.MyTrips.Business.csproj", "{A6A2CB51-04C2-487E-957D-4C15CEF8535B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VA.MyTrips.Business", "src\VA.MyTrips.Business\VA.MyTrips.Business.csproj", "{A6A2CB51-04C2-487E-957D-4C15CEF8535B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VA.MyTrips.Data", "src\VA.MyTrips.Data\VA.MyTrips.Data.csproj", "{C0A51D50-C9E8-4E27-9C81-076E5B525A3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VA.MyTrips.Data", "src\VA.MyTrips.Data\VA.MyTrips.Data.csproj", "{C0A51D50-C9E8-4E27-9C81-076E5B525A3C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{61D07784-433C-4CC1-8165-6B341F0FBCA2}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

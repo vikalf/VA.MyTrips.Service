@@ -33,7 +33,8 @@ namespace VA.MyTrips.Service.AutoMapper
                 .ForMember(dest => dest.Url, opt => opt.MapFrom(src => src.Url));
 
 
-            CreateMap<Data.Models.Trip, Business.Models.TripModel>();
+            CreateMap<Data.Models.Trip, Business.Models.TripModel>()
+                .ReverseMap();
             CreateMap<Data.Models.Photo, Business.Models.PhotoModel>();
 
         }

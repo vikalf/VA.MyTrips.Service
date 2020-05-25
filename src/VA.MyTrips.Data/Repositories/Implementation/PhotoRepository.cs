@@ -43,7 +43,7 @@ namespace VA.MyTrips.Data.Repositories.Implementation
         public async Task<List<Photo>> GetPhotos(string tripId)
         {
             var query = this._container.GetItemQueryIterator<Photo>(
-                new QueryDefinition($"SELECT * FROM c WHERE c.tripid = \"{tripId}\" and c.archived = true"));
+                new QueryDefinition($"SELECT * FROM c WHERE c.tripid = \"{tripId}\" and c.archived = false"));
 
             List<Photo> results = new List<Photo>();
             while (query.HasMoreResults)
