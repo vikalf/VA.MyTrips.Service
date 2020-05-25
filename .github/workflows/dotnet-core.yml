@@ -33,4 +33,4 @@ jobs:
         # Docker repository to tag the image with
         repository: vikalf/va.mytrips.service
         # Comma-delimited list of tags. These will be added to the registry/repository to form the image's tags
-        tags: "latest"
+        tags: "latest,${{ env.GITHUB_REF }}:${{ env.GITHUB_SHA }}"
