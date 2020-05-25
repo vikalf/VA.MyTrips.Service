@@ -25,10 +25,10 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
     - name: Set Set git branch env variables for Docker Tag
       id: get_branch
-      run: echo ::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF:10})
+      run: echo ::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})
     - name: Set Set git commit env variables for Docker Tag
       id: get_commit
-      run: echo ::set-env name=COMMIT::$(echo ${GITHUB_SHA:7})
+      run: echo ::set-env name=COMMIT::$(echo ${GITHUB_SHA::8})
     - name: Build and push Docker images
       uses: docker/build-push-action@v1.1.0
       with:
